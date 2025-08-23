@@ -1,0 +1,30 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.app-header {
+  position: sticky;
+  top: 0;
+  background: $background-color;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+
+    a {
+      font-weight: 500;
+      transition: color 0.3s;
+      &:hover {
+        color: $primary-color;
+      }
+      &.active {
+        border-bottom: 2px solid $primary-color;
+      }
+    }
+  }
+}

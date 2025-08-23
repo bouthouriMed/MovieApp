@@ -1,0 +1,18 @@
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card($width, $height) {
+  width: $width;
+  height: $height;
+  border-radius: 8px;
+  background-color: $secondary-color;
+  color: $text-color;
+}
+
+@mixin transition($props: all, $duration: 0.3s, $ease: ease) {
+  transition: $props $duration $ease;
+}

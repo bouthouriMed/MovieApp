@@ -1,0 +1,38 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.homepage {
+  padding: 2rem;
+
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: $text-color;
+  }
+}
+
+.search-bar {
+  margin: 0 auto 2rem auto;
+  max-width: 500px;
+
+  input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background: $secondary-color;
+    color: $text-color;
+    font-size: 1rem;
+    outline: none;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+
+    &::placeholder {
+      color: lighten($text-color, 30%);
+    }
+
+    &:focus {
+      background: lighten($secondary-color, 10%);
+      box-shadow: 0 0 0 2px $primary-color;
+    }
+  }
+}
