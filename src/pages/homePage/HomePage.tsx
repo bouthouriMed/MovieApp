@@ -10,6 +10,7 @@ import { type RootState } from "../../store/store";
 import { addTowatchList } from "../../store/watchListSlice";
 import { toast } from "react-toastify";
 import "./HomePage.scss";
+import Loading from "../../components/loadingIndicator/LoadingIndicator";
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,7 +43,6 @@ function HomePage() {
 
       if (response?.data?.success) {
         dispatch(addTowatchList(movie));
-        toast.success(`"${movie.title}" added to your watchlist!`);
       } else {
         toast.error("Failed to add movie to watchlist.");
       }
@@ -84,27 +84,39 @@ function HomePage() {
           <section>
             <h2>Popular Movies</h2>
             {popularLoading ? (
-              <div>Loading...</div>
+              <Loading />
             ) : (
-              <Carousel movies={popular || []} onAdd={handleAddToWatchlist} />
+              <Carousel
+                movies={popular || []}
+                onAdd={handleAddToWatchlist}
+                category="popular"
+              />
             )}
           </section>
 
           <section>
             <h2>Top Rated</h2>
             {topLoading ? (
-              <div>Loading...</div>
+              <Loading />
             ) : (
-              <Carousel movies={topRated || []} onAdd={handleAddToWatchlist} />
+              <Carousel
+                movies={topRated || []}
+                onAdd={handleAddToWatchlist}
+                category="topRated"
+              />
             )}
           </section>
 
           <section>
             <h2>Upcoming</h2>
             {upcomingLoading ? (
-              <div>Loading...</div>
+              <Loading />
             ) : (
-              <Carousel movies={upcoming || []} onAdd={handleAddToWatchlist} />
+              <Carousel
+                movies={upcoming || []}
+                onAdd={handleAddToWatchlist}
+                category="upcoming"
+              />
             )}
           </section>
         </>

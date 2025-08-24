@@ -1,0 +1,68 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.login-prompt {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  .card {
+    background: rgba(18, 18, 18, 0.9);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: $text-color;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    h2 {
+      font-family: $font-heading;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: $primary-color;
+    }
+
+    p {
+      font-family: $font-body;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      color: lighten($text-color, 30%);
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #6c63ff, #ff6584);
+      color: $text-color;
+      border: none;
+      border-radius: 30px;
+      padding: 0.8rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(108, 99, 255, 0.4);
+      font-family: $font-body;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        filter: brightness(1.15);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+        filter: brightness(1);
+      }
+    }
+  }
+}

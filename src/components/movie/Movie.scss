@@ -1,0 +1,63 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.movie-card {
+  position: relative;
+  min-width: 370px;
+  height: 460px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: $secondary-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .movie-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  }
+
+  .add-btn {
+    position: absolute;
+    top: auto;
+    right: auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e5091478;
+    border: none;
+    color: $text-color;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    transition: all 0.25s ease;
+
+    &:hover {
+      transform: scale(1.15);
+      background: lighten($primary-color, 10%);
+    }
+
+    &:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

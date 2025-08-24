@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import {
   useGetMovieByIdQuery,
   useAddToWatchlistMutation,
@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTMDBAuth } from "../../hooks/useTMDBAuth";
 import "./MovieDetailPage.scss";
+import Loading from "../../components/loadingIndicator/LoadingIndicator";
 
 const MovieDetailPage = () => {
   const [isInWatchlist, setIsInWatchlist] = useState(false);
@@ -22,6 +23,9 @@ const MovieDetailPage = () => {
   const dispatch = useDispatch();
   const watchList = useSelector((state: any) => state.watchList.items);
 
+  const location = useLocation();
+  const category = location.state?.category || "upcoming";
+
   const { id } = useParams<{ id: string }>();
 
   const { data: movie, isLoading } = useGetMovieByIdQuery(id ? Number(id) : 0);
@@ -30,6 +34,8 @@ const MovieDetailPage = () => {
   const [deleteFromWatchlist] = useDeleteFromWatchlistMutation();
 
   const { sessionId, accountId } = auth;
+
+  console.log({ watchList, isInWatchlist });
 
   // Sync local state with Redux watchlist
   useEffect(() => {
@@ -74,12 +80,11 @@ const MovieDetailPage = () => {
     }
   };
 
-  if (isLoading || !movie)
-    return <div className="movie-detail-page">Loading...</div>;
+  if (isLoading || !movie) return <Loading />;
 
   return (
     <div
-      className="movie-detail-page"
+      className={`movie-detail-page ${category}`}
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
       }}
@@ -105,10 +110,16 @@ const MovieDetailPage = () => {
           </div>
           <p className="overview">{movie.overview}</p>
           <div className="buttons">
-            <button className="favorite-btn" onClick={toggleWatchlist}>
-              {isInWatchlist
-                ? "❌ Remove from Watchlist"
-                : "🎟️ Add to Watchlist"}
+            <button
+              className="favorite-btn"
+              onClick={toggleWatchlist}
+              disabled={!auth.sessionId}
+            >
+              {auth.sessionId
+                ? isInWatchlist
+                  ? "❌ Remove from Watchlist"
+                  : "🎟️ Add to Watchlist"
+                : "🔒 Login to Add"}
             </button>
           </div>
         </div>

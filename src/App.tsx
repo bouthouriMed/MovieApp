@@ -5,9 +5,27 @@ import "./styles/global.scss";
 import { useTMDBAuth } from "./hooks/useTMDBAuth";
 import WatchListPage from "./pages/watchListPage/WatchListPage";
 import "./App.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "./store/authSlice";
+import AuthCallbackPage from "./pages/authCallbackPage/AuthCallbackPage";
+import { clearWatchList } from "./store/watchListSlice";
 
 function App() {
-  const { auth, login } = useTMDBAuth();
+  const { login } = useTMDBAuth();
+
+  const dispatch = useDispatch();
+
+  const sessionId = localStorage.getItem("tmdbSessionId");
+  // const accountId = localStorage.getItem("tmdbAccountId");
+
+  const account = useSelector((state: any) => state.auth.account);
+
+  console.log({ account });
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearWatchList());
+  };
 
   return (
     <Router>
@@ -15,12 +33,28 @@ function App() {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/watchList">watchList</Link>
-          {auth.sessionId ? (
-            <p style={{ margin: "0px" }}>
-              ✅ Logged in as account {auth.accountId}
-            </p>
+          {sessionId ? (
+            <div className="logs">
+              <p className="user-status">
+                <span className="status-badge" />
+                <span className="status-text">
+                  Logged in as{" "}
+                  <span className="username">{account?.account?.username}</span>
+                </span>
+              </p>
+
+              <button
+                className="logout-btn"
+                title="Logout"
+                onClick={handleLogout}
+              >
+                🔒
+              </button>
+            </div>
           ) : (
-            <button onClick={login}>Login with TMDB</button>
+            <button className="login-btn" onClick={login}>
+              Login with TMDB
+            </button>
           )}
         </nav>
       </header>
@@ -30,6 +64,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/movie/:id" element={<MovieDetailPage />} />
           <Route path="/watchList" element={<WatchListPage />} />
+          <Route path="/auth/callback" element={<AuthCallbackPage />} />
         </Routes>
       </main>
     </Router>
