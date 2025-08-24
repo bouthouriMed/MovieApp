@@ -15,6 +15,7 @@
   nav {
     display: flex;
     gap: 1.5rem;
+    width: 100%;
 
     a {
       font-weight: 500;
@@ -24,6 +25,107 @@
       }
       &.active {
         border-bottom: 2px solid $primary-color;
+        color: $primary-color;
+      }
+    }
+
+    // Status badge for logged-in user
+    .user-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: $text-color;
+
+      .status-badge {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: $primary-color;
+        flex-shrink: 0;
+      }
+
+      .status-text {
+        display: flex;
+        align-items: center;
+        line-height: 1;
+      }
+
+      .username {
+        color: $primary-color;
+        font-weight: 600;
+        margin: 0 15px -3px 0.4rem;
+      }
+    }
+
+    // Navbar buttons (login/logout)
+    .login-btn {
+      margin-left: auto;
+      background: linear-gradient(
+        135deg,
+        #6c63ff,
+        #ff6584
+      ); // different gradient from movie buttons
+      color: $text-color;
+      border: none;
+      border-radius: 25px; // rounded like upcoming category buttons
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: $font-body; // clean sans-serif
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+      @include transition(all, 0.3s);
+
+      &:hover {
+        filter: brightness(1.15);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+        filter: brightness(1);
+      }
+    }
+
+    .logs {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: $font-body;
+      font-weight: 500;
+
+      .logout-btn {
+        background: linear-gradient(
+          135deg,
+          #ffb347,
+          #ffcc33
+        ); // golden gradient to stand out
+        border: none;
+        border-radius: 20px;
+        padding: 0.3rem 0.8rem;
+        cursor: pointer;
+        font-size: 1rem;
+        color: $background-color;
+        box-shadow: 0 3px 10px rgba(255, 184, 71, 0.4);
+        @include transition(all, 0.3s);
+
+        &:hover {
+          filter: brightness(1.2);
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+          filter: brightness(1);
+        }
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: lighten($text-color, 20%);
       }
     }
   }

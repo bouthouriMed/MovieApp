@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           position="bottom-right"
           autoClose={2500}
           hideProgressBar={false}
-          newestOnTop={false}
+          newestOnTop={true}
           closeOnClick
           pauseOnHover
           draggable

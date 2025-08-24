@@ -1,0 +1,24 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(229, 9, 20, 0.2); // faded red
+    border-top-color: $primary-color; // highlight
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -12,14 +12,32 @@
   .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(
-      0,
-      0,
-      0,
-      0.7
-    ); // can approximate $background-color if needed
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(6px);
     z-index: 0;
+  }
+
+  // 🎨 Overlay tint per category
+  &.popular .overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 70%,
+      rgba(229, 9, 20, 0.35) 100%
+    );
+  }
+  &.topRated .overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 70%,
+      rgba(255, 204, 0, 0.35) 100%
+    );
+  }
+  &.upcoming .overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 70%,
+      rgba(255, 110, 199, 0.3) 100%
+    );
   }
 
   .content {
@@ -30,7 +48,7 @@
 
     .poster {
       flex: 1;
-      max-width: 320px;
+      max-width: 500px;
 
       img {
         width: 100%;
@@ -80,18 +98,31 @@
       .favorite-btn {
         margin-top: 1rem;
         padding: 0.75rem 1.5rem;
-        background: $primary-color;
         border: none;
-        border-radius: 8px;
-        color: $text-color;
+        @include transition(background, 0.3s);
+
         font-weight: 600;
         font-size: 1rem;
         cursor: pointer;
-        @include transition(background, 0.3s);
 
-        &:hover {
+        &:hover:not(:disabled) {
           background: lighten($primary-color, 10%);
         }
+
+        &:disabled {
+          cursor: not-allowed;
+          background: rgba($primary-color, 0.3); // faded red
+          color: lighten($text-color, 50%);
+          box-shadow: none;
+        }
+      }
+
+      // 🎬 category info label
+      .category-info {
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
       }
     }
   }
@@ -99,7 +130,7 @@
   .additional-info {
     margin-top: 3rem;
     padding: 2rem;
-    background: rgba(18, 18, 18, 0.9); // approximates $background-color
+    background: rgba(18, 18, 18, 0.9);
     border-radius: 12px;
     position: relative;
     z-index: 1;
@@ -154,5 +185,16 @@
         }
       }
     }
+  }
+
+  // 🎭 Apply themes
+  &.popular {
+    @include theme(popular);
+  }
+  &.topRated {
+    @include theme(topRated);
+  }
+  &.upcoming {
+    @include theme(upcoming);
   }
 }
