@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "predeploy": "npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
@@ -41,5 +42,6 @@
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
     "vitest": "^3.2.4"
-  }
+  },
+  "homepage": "https://bouthouriMed.github.io/MovieApp"
 }
