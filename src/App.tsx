@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/global.scss";
 import { useTMDBAuth } from "./hooks/useTMDBAuth";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename="MovieApp">
       <NavBar
         sessionId={sessionId}
         account={account}
