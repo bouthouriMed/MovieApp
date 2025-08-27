@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoadingIndicator > matches snapshot 1`] = `
+<div>
+  <div
+    class="loading-indicator"
+    data-testid="loading"
+  >
+    <div
+      class="spinner"
+    />
+  </div>
+</div>
+`;

@@ -1,27 +1,24 @@
 import { useCallback } from "react";
 import {
-  useGetRequestTokenQuery,
+  useCreateRequestTokenQuery,
   useCreateSessionMutation,
-} from "../store/apiSlice";
+} from "@/store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth } from "../store/authSlice";
+import { setAuth } from "@/store/authSlice";
+import type { Account } from "@/store/authSlice";
+import { toast } from "react-toastify";
 
 interface AuthState {
   sessionId: string | null;
   accountId: number | null;
+  account?: Account | null;
 }
 
 export function useTMDBAuth(doRequestToken = true) {
-  // const [auth, setAuthState] = useState<AuthState>({
-  //   sessionId: localStorage.getItem("tmdbSessionId") || null,
-  //   accountId: Number(localStorage.getItem("tmdbAccountId")) || null,
-  // });
-
   const dispatch = useDispatch();
-
   const auth = useSelector((state: any) => state.auth as AuthState);
 
-  const { data: tokenData } = useGetRequestTokenQuery(undefined, {
+  const { data: tokenData } = useCreateRequestTokenQuery(undefined, {
     skip: !doRequestToken,
   });
   const [createSession] = useCreateSessionMutation();
@@ -29,16 +26,15 @@ export function useTMDBAuth(doRequestToken = true) {
   // Redirect user to TMDB approval
   const login = useCallback(() => {
     if (tokenData?.request_token) {
-      const currentPath = window.location.pathname; // e.g. /watchlist
+      const currentPath = window.location.pathname || "/"; // fallback to '/'
       window.location.href = `https://www.themoviedb.org/authenticate/${
         tokenData.request_token
       }?redirect_to=${
         window.location.origin
       }/auth/callback?from=${encodeURIComponent(currentPath)}`;
-    }
+    } else toast.error("No authorisation token");
   }, [tokenData]);
 
-  // Function to finalize login with request_token
   const finalizeLogin = useCallback(
     async (requestToken: string) => {
       const { data } = await createSession({ request_token: requestToken });
@@ -48,22 +44,15 @@ export function useTMDBAuth(doRequestToken = true) {
             import.meta.env.VITE_TMDB_API_KEY_V3
           }&session_id=${data.session_id}`
         );
-        const account = await res.json();
+        const account: Account = await res.json();
 
-        console.log({ account });
+        dispatch(setAuth({ sessionId: data.session_id, account }));
 
-        const newAuth = {
-          sessionId: data.session_id,
-          account,
-        };
-
-        localStorage.setItem("tmdbSessionId", newAuth.sessionId);
-        localStorage.setItem("tmdbAccountId", newAuth.account.id.toString());
-        // setAuthState(newAuth);
-        dispatch(setAuth(newAuth));
+        localStorage.setItem("tmdbSessionId", data.session_id);
+        localStorage.setItem("tmdbAccountId", account.id.toString());
       }
     },
-    [createSession]
+    [createSession, dispatch]
   );
 
   return { auth, login, finalizeLogin };

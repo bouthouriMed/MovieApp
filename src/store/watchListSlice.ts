@@ -1,61 +1,59 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { Movie } from "src/pages/movieDetailPage/types";
 
-interface Movie {
+export interface WatchListItem {
   id: number;
   title: string;
   poster_path: string;
   release_date: string;
   vote_average: number;
-  overview: string;
 }
 
-interface watchListState {
-  items: Movie[];
+export interface WatchListState {
+  movies: Movie[];
 }
 
-const initialState: watchListState = {
-  items: [],
-};
+const initialState: WatchListState = { movies: [] };
 
-const watchListSlice = createSlice({
+export const watchListSlice = createSlice({
   name: "watchList",
   initialState,
   reducers: {
     addTowatchList: (state, action: PayloadAction<Movie>) => {
-      const movieExists = state.items.some((m) => m.id === action.payload.id);
+      const movieExists = state.movies.some((m) => m.id === action.payload.id);
 
       if (movieExists) {
-        toast.info(`"${action.payload.title}" is already in your watchlist.`);
+        toast.info(`"${action.payload.title}" is already in your wishlist.`);
         return;
       }
 
-      state.items = [...state.items, action.payload];
-      toast.success(`"${action.payload.title}" added to your watchlist!`);
+      state.movies = [...state.movies, action.payload];
+      toast.success(`"${action.payload.title}" added to your wishlist!`);
     },
-
-    removeFromwatchList: (state, action: PayloadAction<number>) => {
-      const movie = state.items.find((m) => m.id === action.payload);
-      state.items = state.items.filter((m) => m.id !== movie?.id);
-      if (movie) {
-        toast.info(`${movie.title} is removed from watchList!`);
-      }
-    },
-
     setwatchList: (state, action: PayloadAction<Movie[]>) => {
-      state.items = action.payload;
+      state.movies = action.payload;
     },
-
+    removeFromwatchList: (state, action: PayloadAction<number>) => {
+      const removedMovie = state.movies.find((m) => m.id === action.payload);
+      state.movies = state.movies.filter((m) => m.id !== action.payload);
+      toast.info(`"${removedMovie?.title}" is removed from you wishlist`);
+    },
     clearWatchList: (state) => {
-      state.items = [];
+      state.movies = [];
     },
   },
 });
 
+// Explicitly type the reducer to allow undefined initial state
+export default watchListSlice.reducer as unknown as (
+  state: WatchListState | undefined,
+  action: any
+) => WatchListState;
+
 export const {
+  setwatchList,
   addTowatchList,
   removeFromwatchList,
-  setwatchList,
   clearWatchList,
 } = watchListSlice.actions;
-export default watchListSlice.reducer;

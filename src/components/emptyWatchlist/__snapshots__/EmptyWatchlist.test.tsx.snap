@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EmptyWatchlist > matches snapshot 1`] = `
+<div>
+  <div
+    class="empty-state"
+  >
+    <p>
+       Empty wishlist 
+    </p>
+    <h2>
+      Your wishlist is empty 🎥
+    </h2>
+    <p>
+      Start exploring movies and add them to your wishlist.
+    </p>
+    <a
+      class="browse-btn"
+      data-discover="true"
+      href="/"
+    >
+      Browse Movies
+    </a>
+  </div>
+</div>
+`;

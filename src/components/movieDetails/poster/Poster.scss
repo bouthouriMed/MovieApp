@@ -1,0 +1,26 @@
+.poster {
+  flex: 1;
+  max-width: 500px;
+
+  img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    img {
+      border-radius: 10px;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}

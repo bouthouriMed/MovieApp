@@ -1,0 +1,45 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AdditionalInfo > matches snapshot 1`] = `
+<div>
+  <div
+    class="additional-info"
+  >
+    <h2>
+      Additional Information
+    </h2>
+    <div
+      class="grid"
+    >
+      <div>
+        <strong>
+          Spoken Languages:
+        </strong>
+         
+        English
+      </div>
+      <div>
+        <strong>
+          Budget:
+        </strong>
+         $
+        1 000 000
+      </div>
+      <div>
+        <strong>
+          Revenue:
+        </strong>
+         $
+        5 000 000
+      </div>
+      <div>
+        <strong>
+          Popularity:
+        </strong>
+         
+        50
+      </div>
+    </div>
+  </div>
+</div>
+`;

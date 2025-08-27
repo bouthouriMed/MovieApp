@@ -1,8 +1,10 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .homepage {
   padding: 2rem;
+  max-width: 90%;
+  margin: 0 auto;
 
   section {
     margin-bottom: 3rem;
@@ -13,30 +15,20 @@
     font-size: 2.5rem;
     color: $text-color;
   }
-}
 
-.search-bar {
-  margin: 0 auto 2rem auto;
-  max-width: 500px;
+  @media (max-width: 768px) {
+    padding: 1.5rem;
 
-  input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    border: none;
-    background: $secondary-color;
-    color: $text-color;
-    font-size: 1rem;
-    outline: none;
-    transition: box-shadow 0.3s ease, background 0.3s ease;
-
-    &::placeholder {
-      color: lighten($text-color, 30%);
+    h1 {
+      font-size: 2rem;
     }
+  }
 
-    &:focus {
-      background: lighten($secondary-color, 5%);
-      box-shadow: 0 0 8px rgba(229, 9, 20, 0.3); // softer, semi-transparent red
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    h1 {
+      font-size: 1.75rem;
     }
   }
 }

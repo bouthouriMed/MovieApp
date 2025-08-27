@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import "./Movie.scss";
 
@@ -7,7 +8,7 @@ interface MovieProps {
   category?: string;
 }
 
-function Movie({ movie, onAdd, category }: MovieProps) {
+function Movie({ movie, category }: MovieProps) {
   return (
     <div className="movie-card">
       <Link
@@ -22,7 +23,7 @@ function Movie({ movie, onAdd, category }: MovieProps) {
         />
       </Link>
 
-      {onAdd && (
+      {/* {onAdd && (
         <button
           className="add-btn"
           onClick={() => onAdd(movie)}
@@ -30,9 +31,9 @@ function Movie({ movie, onAdd, category }: MovieProps) {
         >
           ➕
         </button>
-      )}
+      )} */}
     </div>
   );
 }
 
-export default Movie;
+export default memo(Movie);

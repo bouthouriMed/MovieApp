@@ -19,13 +19,14 @@ export default tseslint.config([
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        ecmaFeatures: { jsx: true }, // ✅ allow JSX
-        project: "./tsconfig.json", // ✅ link to your TS config
+        ecmaFeatures: { jsx: true },
+        project: "./tsconfig.json",
       },
       globals: globals.browser,
     },
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
     },
+    ignorePatterns: ["vite.config.ts"],
   },
 ]);

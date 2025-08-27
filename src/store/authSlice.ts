@@ -1,10 +1,14 @@
-// src/store/authSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface AuthState {
+export interface Account {
+  id: number;
+  username: string;
+}
+
+export interface AuthState {
   sessionId: string | null;
   accountId: number | null;
-  account: any | null;
+  account?: Account | null;
 }
 
 const initialState: AuthState = {
@@ -23,18 +27,21 @@ const authSlice = createSlice({
   reducers: {
     setAuth: (
       state,
-      action: PayloadAction<{ sessionId: string; account: any }>
+      action: PayloadAction<{ sessionId: string; account: Account }>
     ) => {
       state.sessionId = action.payload.sessionId;
       state.accountId = action.payload.account.id;
-      state.account = action.payload;
+      state.account = action.payload.account;
 
       localStorage.setItem("tmdbSessionId", action.payload.sessionId);
       localStorage.setItem(
         "tmdbAccountId",
         action.payload.account.id.toString()
       );
-      localStorage.setItem("tmdbAccount", JSON.stringify(action.payload));
+      localStorage.setItem(
+        "tmdbAccount",
+        JSON.stringify(action.payload.account)
+      );
     },
     logout: (state) => {
       state.sessionId = null;
@@ -43,9 +50,11 @@ const authSlice = createSlice({
 
       localStorage.removeItem("tmdbSessionId");
       localStorage.removeItem("tmdbAccountId");
+      localStorage.removeItem("tmdbAccount");
     },
   },
 });
 
 export const { setAuth, logout } = authSlice.actions;
+
 export default authSlice.reducer;

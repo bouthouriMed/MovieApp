@@ -1,0 +1,66 @@
+@import "@/styles/variables";
+
+.search-bar {
+  position: relative;
+  margin: 0 auto;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 0.7rem 2.5rem 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    background: $secondary-color;
+    color: $text-color;
+    font-size: 1rem;
+    outline: none;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+
+    &::placeholder {
+      color: lighten($text-color, 30%);
+    }
+
+    &:focus {
+      background: lighten($secondary-color, 5%);
+      box-shadow: 0 0 8px rgba(229, 9, 20, 0.3);
+    }
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    font-size: 1rem;
+    transform: translateY(-50%);
+    color: lighten($text-color, 30%);
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+    margin: 2rem auto;
+
+    input {
+      padding: 0.7rem 2.2rem 0.7rem 2.2rem;
+      font-size: 0.95rem;
+    }
+
+    .icon {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    input {
+      padding: 0.6rem 2rem 0.6rem 2rem;
+      font-size: 0.9rem;
+    }
+
+    .search-icon,
+    .clear-icon {
+      font-size: 0.85rem;
+    }
+  }
+}

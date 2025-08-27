@@ -1,32 +1,31 @@
 import React, { useState } from "react";
-import Carousel from "../../components/carousel/Carousel";
 import {
-  useGetMoviesQuery,
   useSearchMoviesQuery,
   useAddToWatchlistMutation,
-} from "../../store/apiSlice";
+} from "@/store/movieSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { type RootState } from "../../store/store";
-import { addTowatchList } from "../../store/watchListSlice";
+import { type RootState } from "@/store/store";
+import { addTowatchList } from "@/store/watchListSlice";
 import { toast } from "react-toastify";
 import "./HomePage.scss";
-import Loading from "../../components/loadingIndicator/LoadingIndicator";
+import SearchBar from "@/components/home/searchBar/SearchBar";
+import MovieSection from "@/components/home/movieSection/MovieSection";
+import SearchResults from "@/components/home/searchResults/SearchResults";
+import { useNavigate } from "react-router-dom";
+import { ROUTES_URLS } from "@/routes";
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const auth = useSelector((state: RootState) => state.auth);
-
-  const { data: popular, isLoading: popularLoading } =
-    useGetMoviesQuery("popular");
-  const { data: topRated, isLoading: topLoading } =
-    useGetMoviesQuery("top_rated");
-  const { data: upcoming, isLoading: upcomingLoading } =
-    useGetMoviesQuery("upcoming");
-  const { data: searchResults, isLoading: searchLoading } =
-    useSearchMoviesQuery(searchTerm, { skip: !searchTerm });
-
   const [addToWatchlist] = useAddToWatchlistMutation();
+
+  const {
+    data: searchResults,
+    isLoading: searchLoading,
+    isError: isSearchError,
+  } = useSearchMoviesQuery(searchTerm, { skip: !searchTerm });
 
   const handleAddToWatchlist = async (movie: any) => {
     if (!auth.sessionId || !auth.accountId) {
@@ -52,75 +51,39 @@ function HomePage() {
     }
   };
 
+  const movieCategories = [
+    { title: "Popular Movies", category: "popular" },
+    { title: "Top Rated", category: "top_rated" },
+    { title: "Upcoming", category: "upcoming" },
+  ];
+
+  if (isSearchError) navigate(ROUTES_URLS.Oops);
+
   return (
     <div className="homepage">
       <h1>Film Explorer</h1>
 
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search for a movie..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      {/* 🔹 SearchBar */}
+      <SearchBar value={searchTerm} onChange={setSearchTerm} />
 
-      {searchTerm && (
-        <section>
-          <h2>Search Results</h2>
-          {searchLoading ? (
-            <div>Searching...</div>
-          ) : (
-            <Carousel
-              movies={searchResults || []}
-              onAdd={handleAddToWatchlist}
-            />
-          )}
-        </section>
-      )}
+      {/* 🔹 SearchResults */}
+      <SearchResults
+        searchTerm={searchTerm}
+        results={searchResults || []}
+        isLoading={searchLoading}
+        onAdd={handleAddToWatchlist}
+      />
 
-      {!searchTerm && (
-        <>
-          <section>
-            <h2>Popular Movies</h2>
-            {popularLoading ? (
-              <Loading />
-            ) : (
-              <Carousel
-                movies={popular || []}
-                onAdd={handleAddToWatchlist}
-                category="popular"
-              />
-            )}
-          </section>
-
-          <section>
-            <h2>Top Rated</h2>
-            {topLoading ? (
-              <Loading />
-            ) : (
-              <Carousel
-                movies={topRated || []}
-                onAdd={handleAddToWatchlist}
-                category="topRated"
-              />
-            )}
-          </section>
-
-          <section>
-            <h2>Upcoming</h2>
-            {upcomingLoading ? (
-              <Loading />
-            ) : (
-              <Carousel
-                movies={upcoming || []}
-                onAdd={handleAddToWatchlist}
-                category="upcoming"
-              />
-            )}
-          </section>
-        </>
-      )}
+      {/* 🔹 Movie Sections */}
+      {!searchTerm &&
+        movieCategories.map(({ title, category }) => (
+          <MovieSection
+            key={category}
+            title={title}
+            category={category}
+            onAdd={handleAddToWatchlist}
+          />
+        ))}
     </div>
   );
 }
