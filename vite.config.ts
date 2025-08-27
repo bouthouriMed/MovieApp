@@ -12,7 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "\\.(css|scss)$": "./__mocks__/styleMock.js",
+      "\\.(css|scss)$": path.resolve(__dirname, "__mocks__/styleMock.ts"),
     },
   },
 });
