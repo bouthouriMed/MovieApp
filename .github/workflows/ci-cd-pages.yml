@@ -1,17 +1,15 @@
 name: CI/CD Pipeline
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main]
-  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # manual trigger
 
 permissions:
-  contents: read # read repo content
-  id-token: write # required for GitHub Pages
-  pages: write # allow deployment
-  actions: read
+  contents: read
+  id-token: write # required for GitHub Pages deploy
 
 jobs:
   ci:
@@ -19,11 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - run: npm ci
       - run: npm run lint
       - run: npm run test
@@ -38,16 +34,12 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - run: npm ci
-      - run: npm run build
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: github-actions
+          user_email: github-actions@github.com
