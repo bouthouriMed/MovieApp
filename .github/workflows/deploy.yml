@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: CD Pipeline
 
 on:
   push:
@@ -24,12 +24,14 @@ jobs:
       - run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
+          name: my-artifact
           path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/deploy-pages@v2
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
