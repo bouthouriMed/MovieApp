@@ -2,10 +2,10 @@ name: CD Pipeline
 
 on:
   workflow_run:
-    workflows: ["CI Pipeline"] # triggers only after CI
+    workflows: ["CI Pipeline"] # Auto-run after CI
     types:
       - completed
-  workflow_dispatch: # optional manual trigger
+  workflow_dispatch: # Manual trigger
 
 permissions:
   contents: write
@@ -14,15 +14,33 @@ permissions:
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} # only run if CI succeeded
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      # Only deploy if this run is triggered by a CI success OR
+      # manual run and the latest CI run on this branch passed
+      - name: Check CI status
+        id: ci_status
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_run" ]]; then
+            if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+              echo "CI failed. Exiting CD."
+              exit 1
+            fi
+          else
+            # Manual run: get latest CI run for this branch
+            LATEST_CI=$(gh run list --workflow "CI Pipeline" --branch $GITHUB_REF_NAME --limit 1 --json conclusion --jq '.[0].conclusion')
+            echo "Latest CI run conclusion: $LATEST_CI"
+            if [[ "$LATEST_CI" != "success" ]]; then
+              echo "Latest CI did not pass. Exiting CD."
+              exit 1
+            fi
+          fi
 
       - run: npm ci
       - run: npm run build
