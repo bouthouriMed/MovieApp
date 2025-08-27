@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <Router basename="MovieApp">
+    <Router>
       <NavBar
         sessionId={sessionId}
         account={account}
