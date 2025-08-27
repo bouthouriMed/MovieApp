@@ -1,9 +1,9 @@
 name: CI/CD Pipeline
 
 on:
-  pull_request:
-    branches: [main]
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
@@ -50,5 +50,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.GH_PAT }} # your personal Github access token secret
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
