@@ -16,10 +16,12 @@ const AdditionalInfo = ({ movie }: AdditionalInfoProps) => {
           {movie?.spoken_languages?.map((l) => l?.english_name)?.join(", ")}
         </div>
         <div>
-          <strong>Budget:</strong> ${movie?.budget?.toLocaleString()}
+          <strong>Budget:</strong> $
+          {Intl.NumberFormat("en-US").format(movie?.budget ?? 0)}
         </div>
         <div>
-          <strong>Revenue:</strong> ${movie?.revenue?.toLocaleString()}
+          <strong>Revenue:</strong> $
+          {Intl.NumberFormat("en-US").format(movie?.revenue ?? 0)}
         </div>
         <div>
           <strong>Popularity:</strong> {movie?.popularity?.toFixed(0)}
