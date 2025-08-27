@@ -1,21 +1,26 @@
 name: CD Pipeline
 
-# Trigger only after CI workflow succeeds
 on:
   workflow_run:
-    workflows: ["CI Pipeline"] # exact name of the CI workflow
+    workflows: ["CI Pipeline"] # triggers only after CI
     types:
       - completed
+  workflow_dispatch: # optional manual trigger
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} # ✅ ensure CI passed
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # only run if CI succeeded
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
