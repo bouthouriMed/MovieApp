@@ -1,39 +1,34 @@
 name: CD Pipeline
 
 on:
+  workflow_dispatch: # manual trigger
   workflow_run:
-    workflows: ["CI Pipeline"]
+    workflows: ["CI Pipeline"] # name of your CI workflow
     types:
       - completed
-  workflow_dispatch: {}
+    branches: [main] # only trigger when main branch CI completes
+
+concurrency:
+  group: cd-pipeline
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
-
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
 
-      # Download the artifact from CI if triggered by workflow_run
-      - name: Download artifact
-        if: github.event_name == 'workflow_run'
+      # Download the artifact uploaded by CI
+      - name: Download Pages artifact
         uses: actions/download-artifact@v4
         with:
           name: github-pages
           path: ./dist
 
-      # If manual dispatch, build locally
-      - name: Build (manual dispatch only)
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          npm ci
-          npm run build
-
       # Deploy to GitHub Pages
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
+
+      - name: Confirm deployment
+        run: echo "Deployment complete!"
