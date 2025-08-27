@@ -26,12 +26,12 @@ export function useTMDBAuth(doRequestToken = true) {
   // Redirect user to TMDB approval
   const login = useCallback(() => {
     if (tokenData?.request_token) {
-      const currentPath = window.location.pathname || "/"; // fallback to '/'
-      window.location.href = `https://www.themoviedb.org/authenticate/${
-        tokenData.request_token
-      }?redirect_to=${
+      const currentPath = window.location.hash || "#/"; // fallback to '#/'
+      const redirectUrl = `${
         window.location.origin
-      }/auth/callback?from=${encodeURIComponent(currentPath)}`;
+      }/MovieApp/#/auth/callback?from=${encodeURIComponent(currentPath)}`;
+
+      window.location.href = `https://www.themoviedb.org/authenticate/${tokenData.request_token}?redirect_to=${redirectUrl}`;
     } else toast.error("No authorisation token");
   }, [tokenData]);
 
