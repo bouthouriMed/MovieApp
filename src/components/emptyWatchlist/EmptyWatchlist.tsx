@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import "./emptyWatchlist.scss";
 import { ROUTES_URLS } from "@/routes";
+import "./EmptyWatchlist.scss";
 
 function EmptyWatchlist() {
   return (
