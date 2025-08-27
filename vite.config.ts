@@ -15,4 +15,5 @@ export default defineConfig({
       "\\.(css|scss)$": path.resolve(__dirname, "__mocks__/styleMock.ts"),
     },
   },
+  base: "/MovieApp/",
 });
