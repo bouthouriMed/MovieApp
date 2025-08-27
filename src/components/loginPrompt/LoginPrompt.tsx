@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
+import { useTMDBAuth } from "@/hooks/useTMDBAuth";
 import "./LoginPrompt.scss";
-import { useTMDBAuth } from "../../hooks/useTMDBAuth";
 
 const LoginPrompt: React.FC = () => {
   const { login } = useTMDBAuth();
@@ -20,4 +20,4 @@ const LoginPrompt: React.FC = () => {
   );
 };
 
-export default LoginPrompt;
+export default memo(LoginPrompt);

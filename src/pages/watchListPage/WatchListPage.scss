@@ -1,13 +1,15 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .watchList-page {
-  padding: 2rem;
   color: $text-color;
   min-height: 100vh;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
 
   h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     margin-bottom: 1.5rem;
     font-weight: bold;
     text-align: center;
@@ -20,106 +22,21 @@
     margin-top: 4rem;
   }
 
-  /* Compact Grid Layout */
   .watchList-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); // fewer items
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 2fr);
+    gap: 1.8rem;
     justify-items: center;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr; // 1 movie per row on mobile
-    }
-  }
-  .watchList-card {
-    flex: 0 0 auto;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    background: $secondary-color;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    }
-
-    .poster-img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      border-radius: 12px;
-      display: block;
-    }
-
-    .details {
-      width: 100%;
-      padding: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 0.25rem;
-
-      .title {
-        font-size: 1rem;
-        font-weight: 600;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2; // limit to 2 lines
-        -webkit-box-orient: vertical;
-        word-wrap: break-word;
-      }
-
-      .meta {
-        font-size: 0.75rem;
-        color: lighten($text-color, 40%);
-      }
-
-      .remove-btn {
-        margin-top: 0.25rem;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-        background: rgba($primary-color, 0.9);
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:hover {
-          background: $primary-color;
-        }
-      }
-    }
   }
 
-  /* Responsive: Mobile view */
   @media (max-width: 768px) {
-    .watchList-grid {
-      grid-template-columns: 1fr; // single card per row
-      gap: 1rem;
+    h1 {
+      font-size: 1.8rem;
     }
 
-    .watchList-card {
-      width: 100%;
-
-      .poster-img {
-        aspect-ratio: 2/1; // taller/wider poster for mobile
-      }
-
-      .details {
-        .title {
-          font-size: 1rem;
-        }
-        .meta {
-          font-size: 0.8rem;
-        }
-      }
+    .watchList-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
   }
 }

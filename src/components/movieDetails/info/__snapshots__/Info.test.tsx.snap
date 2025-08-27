@@ -1,0 +1,52 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Info Component > matches snapshot 1`] = `
+<div>
+  <div
+    class="info"
+  >
+    <h1>
+      Test Movie
+    </h1>
+    <h3
+      class="tagline"
+    >
+      “
+      Test tagline
+      ”
+    </h3>
+    <div
+      class="meta"
+    >
+      <span>
+        2023
+      </span>
+       •
+       
+      <span>
+        120
+         min
+      </span>
+       •
+       
+      <span>
+        Action
+      </span>
+    </div>
+    <div
+      class="rating"
+    >
+      ⭐ 
+      8.0
+       / 10 (
+      100
+       votes)
+    </div>
+    <p
+      class="overview"
+    >
+      Test overview
+    </p>
+  </div>
+</div>
+`;

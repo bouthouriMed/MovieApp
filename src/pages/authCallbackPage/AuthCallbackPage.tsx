@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTMDBAuth } from "../../hooks/useTMDBAuth";
+import { ROUTES_URLS } from "@/routes";
+import { useTMDBAuth } from "@/hooks/useTMDBAuth";
 
 const AuthCallbackPage = () => {
   const { finalizeLogin } = useTMDBAuth(false);
@@ -10,18 +11,18 @@ const AuthCallbackPage = () => {
     const params = new URLSearchParams(window.location.search);
     const request_token = params.get("request_token");
     const approved = params.get("approved");
-    const from = params.get("from") || "/"; // fallback to home
+    const from = params.get("from") || ROUTES_URLS.Home; // fallback to home
 
     if (approved === "true" && request_token) {
       finalizeLogin(request_token).then(() => {
         navigate(from);
       });
     } else {
-      navigate("/");
+      navigate(ROUTES_URLS.Home);
     }
   }, [finalizeLogin, navigate]);
 
-  return <p>Authorizing... please wait</p>;
+  return <p style={{ margin: "20px" }}>Authorizing... please wait</p>;
 };
 
 export default AuthCallbackPage;

@@ -1,0 +1,61 @@
+@import "@/styles/variables";
+
+.additional-info {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(18, 18, 18, 0.9);
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+
+  h2 {
+    margin-bottom: 1rem;
+    color: $text-color;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+
+    div {
+      font-size: 0.95rem;
+      color: $text-color;
+
+      strong {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .companies {
+    margin-top: 2rem;
+
+    h3 {
+      margin-bottom: 1rem;
+      color: $text-color;
+    }
+
+    .logos {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      .company {
+        background: $secondary-color;
+        padding: 0.5rem;
+        border-radius: 8px;
+
+        img {
+          max-height: 40px;
+          object-fit: contain;
+        }
+
+        span {
+          font-size: 0.9rem;
+          color: lighten($text-color, 30%);
+        }
+      }
+    }
+  }
+}

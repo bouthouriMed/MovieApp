@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginPrompt > matches snapshot 1`] = `
+<div>
+  <div
+    class="login-prompt"
+  >
+    <div
+      class="card"
+    >
+      <h2>
+        👀 Your Watchlist Awaits!
+      </h2>
+      <p>
+        You can only see your watchlist if you’re logged in with your TMDB account.
+      </p>
+      <button
+        class="login-btn"
+      >
+        Login with TMDB
+      </button>
+    </div>
+  </div>
+</div>
+`;

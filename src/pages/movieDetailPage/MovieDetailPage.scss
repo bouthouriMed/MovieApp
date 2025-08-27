@@ -1,7 +1,19 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .movie-detail-page {
+  @include theme();
+
+  &.#{$CATEGORY_POPULAR} {
+    @include theme($CATEGORY_POPULAR);
+  }
+  &.#{$CATEGORY_TOP_RATED} {
+    @include theme($CATEGORY_TOP_RATED);
+  }
+  &.#{$CATEGORY_UPCOMING} {
+    @include theme($CATEGORY_UPCOMING);
+  }
+
   min-height: 100vh;
   padding: 2rem;
   background-size: cover;
@@ -17,22 +29,21 @@
     z-index: 0;
   }
 
-  // 🎨 Overlay tint per category
-  &.popular .overlay {
+  &.#{$CATEGORY_POPULAR} .overlay {
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.6) 70%,
       rgba(229, 9, 20, 0.35) 100%
     );
   }
-  &.topRated .overlay {
+  &.#{$CATEGORY_TOP_RATED} .overlay {
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.6) 70%,
       rgba(255, 204, 0, 0.35) 100%
     );
   }
-  &.upcoming .overlay {
+  &.#{$CATEGORY_UPCOMING} .overlay {
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.6) 70%,
@@ -46,155 +57,29 @@
     gap: 2rem;
     z-index: 1;
 
-    .poster {
-      flex: 1;
-      max-width: 500px;
-
-      img {
-        width: 100%;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
-        @include transition(transform, 0.3s);
-
-        &:hover {
-          transform: scale(1.05);
-        }
-      }
-    }
-
-    .info {
-      flex: 2;
-      display: flex;
+    @media (max-width: 768px) {
       flex-direction: column;
-      gap: 1rem;
-
-      h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-      }
-
-      .tagline {
-        font-style: italic;
-        color: lighten($text-color, 40%);
-      }
-
-      .meta {
-        font-size: 0.95rem;
-        color: lighten($text-color, 30%);
-      }
-
-      .rating {
-        font-size: 1rem;
-        font-weight: 600;
-        color: $primary-color;
-      }
-
-      .overview {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: lighten($text-color, 20%);
-      }
-
-      .favorite-btn {
-        margin-top: 1rem;
-        padding: 0.75rem 1.5rem;
-        border: none;
-        @include transition(background, 0.3s);
-
-        font-weight: 600;
-        font-size: 1rem;
-        cursor: pointer;
-
-        &:hover:not(:disabled) {
-          background: lighten($primary-color, 10%);
-        }
-
-        &:disabled {
-          cursor: not-allowed;
-          background: rgba($primary-color, 0.3); // faded red
-          color: lighten($text-color, 50%);
-          box-shadow: none;
-        }
-      }
-
-      // 🎬 category info label
-      .category-info {
-        margin-top: 1rem;
-        font-size: 1rem;
-        font-weight: 600;
-        text-align: center;
-      }
+      gap: 1.5rem;
     }
   }
 
-  .additional-info {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: rgba(18, 18, 18, 0.9);
-    border-radius: 12px;
-    position: relative;
-    z-index: 1;
+  @media (max-width: 768px) {
+    padding: 1rem;
 
-    h2 {
-      margin-bottom: 1rem;
-      color: $text-color;
+    .content {
+      text-align: center;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
+    .additional-info {
+      padding: 1rem;
 
-      div {
-        font-size: 0.95rem;
-        color: $text-color;
-
-        strong {
-          color: $primary-color;
-        }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .companies .logos {
+        flex-direction: column;
+        gap: 0.5rem;
       }
     }
-
-    .companies {
-      margin-top: 2rem;
-
-      h3 {
-        margin-bottom: 1rem;
-        color: $text-color;
-      }
-
-      .logos {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-
-        .company {
-          background: $secondary-color;
-          padding: 0.5rem;
-          border-radius: 8px;
-
-          img {
-            max-height: 40px;
-            object-fit: contain;
-          }
-
-          span {
-            font-size: 0.9rem;
-            color: lighten($text-color, 30%);
-          }
-        }
-      }
-    }
-  }
-
-  // 🎭 Apply themes
-  &.popular {
-    @include theme(popular);
-  }
-  &.topRated {
-    @include theme(topRated);
-  }
-  &.upcoming {
-    @include theme(upcoming);
   }
 }

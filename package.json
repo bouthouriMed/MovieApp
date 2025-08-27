@@ -7,40 +7,39 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:w": "vitest --watch",
+    "test:u": "vitest -u"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.8.2",
-    "@tanstack/react-query": "^5.85.5",
-    "axios": "^1.11.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-redux": "^9.2.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.8.1",
     "react-toastify": "^11.0.5",
     "sass": "^1.90.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@reduxjs/toolkit": "^2.8.2",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^30.0.0",
+    "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^5.0.1",
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
-    "jest": "^30.0.5",
+    "jsdom": "^26.1.0",
+    "react-redux": "^9.2.0",
+    "ts-jest": "^29.4.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
-    ]
+    "vite": "^7.1.2",
+    "vitest": "^3.2.4"
   }
 }

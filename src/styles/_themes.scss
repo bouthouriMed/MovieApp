@@ -1,0 +1,28 @@
+$themes: (
+  // Theme: popular
+  #{$CATEGORY_POPULAR}: (
+      font: $font-popular,
+      btn-bg: $primary-color,
+      btn-radius: 8px,
+      tagline-color: lighten($text-color, 20%),
+      accent-shadow: 0 0 10px rgba($primary-color, 0.6),
+    ),
+  // Theme: top_rated
+  #{$CATEGORY_TOP_RATED}: (
+      font: $font-heading,
+      btn-bg: $highlight,
+      btn-radius: 50px,
+      tagline-color: $highlight,
+      tagline-border: $highlight,
+      accent-shadow: 0 0 12px rgba($highlight, 0.8),
+      btn-border: #000000d6,
+    ),
+  // Theme: upcoming
+  #{$CATEGORY_UPCOMING}: (
+      font: $font-upcoming,
+      btn-bg: linear-gradient(135deg, #ff6ec7, #ffa84c),
+      btn-radius: 30px,
+      tagline-color: #ff6ec7,
+      accent-shadow: 0 0 15px rgba(#ff6ec7, 0.8),
+    )
+);

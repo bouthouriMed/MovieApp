@@ -19,28 +19,19 @@ $font-body: "Inter", sans-serif;
 $font-popular: "Merriweather", serif;
 $font-upcoming: "Poppins", sans-serif;
 
-// 🌈 Category Themes
-$themes: (
-  popular: (
-    font: $font-popular,
-    btn-bg: $primary-color,
-    btn-radius: 8px,
-    tagline-color: lighten($text-color, 20%),
-    accent-shadow: 0 0 10px rgba($primary-color, 0.6),
-  ),
-  topRated: (
-    font: $font-heading,
-    btn-bg: $highlight,
-    btn-radius: 50px,
-    tagline-color: $highlight,
-    tagline-border: $highlight,
-    accent-shadow: 0 0 12px rgba($highlight, 0.8),
-  ),
-  upcoming: (
-    font: $font-upcoming,
-    btn-bg: linear-gradient(135deg, #ff6ec7, #ffa84c),
-    btn-radius: 30px,
-    tagline-color: #ff6ec7,
-    accent-shadow: 0 0 15px rgba(#ff6ec7, 0.8),
-  ),
+// Category constants
+$CATEGORY_POPULAR: "popular";
+$CATEGORY_TOP_RATED: "top_rated";
+$CATEGORY_UPCOMING: "upcoming";
+
+// Default Theme
+$default-theme: (
+  font: $font-main,
+  btn-bg: $primary-color,
+  btn-radius: 8px,
+  tagline-color: lighten($text-color, 40%),
+  accent-shadow: 0 0 10px rgba($primary-color, 0.6),
 );
+
+// Category themes
+@import "_themes";

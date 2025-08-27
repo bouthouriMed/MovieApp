@@ -1,14 +1,11 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import HomePage from "./pages/homePage/HomePage";
-import MovieDetailPage from "./pages/movieDetailPage/MovieDetailPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/global.scss";
 import { useTMDBAuth } from "./hooks/useTMDBAuth";
-import WatchListPage from "./pages/watchListPage/WatchListPage";
-import "./App.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./store/authSlice";
-import AuthCallbackPage from "./pages/authCallbackPage/AuthCallbackPage";
 import { clearWatchList } from "./store/watchListSlice";
+import { routes } from "./routes";
+import NavBar from "./components/navBar/NavBar";
 
 function App() {
   const { login } = useTMDBAuth();
@@ -16,11 +13,8 @@ function App() {
   const dispatch = useDispatch();
 
   const sessionId = localStorage.getItem("tmdbSessionId");
-  // const accountId = localStorage.getItem("tmdbAccountId");
 
   const account = useSelector((state: any) => state.auth.account);
-
-  console.log({ account });
 
   const handleLogout = () => {
     dispatch(logout());
@@ -29,42 +23,18 @@ function App() {
 
   return (
     <Router>
-      <header className="app-header">
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/watchList">watchList</Link>
-          {sessionId ? (
-            <div className="logs">
-              <p className="user-status">
-                <span className="status-badge" />
-                <span className="status-text">
-                  Logged in as{" "}
-                  <span className="username">{account?.account?.username}</span>
-                </span>
-              </p>
-
-              <button
-                className="logout-btn"
-                title="Logout"
-                onClick={handleLogout}
-              >
-                🔒
-              </button>
-            </div>
-          ) : (
-            <button className="login-btn" onClick={login}>
-              Login with TMDB
-            </button>
-          )}
-        </nav>
-      </header>
+      <NavBar
+        sessionId={sessionId}
+        account={account}
+        login={login}
+        handleLogout={handleLogout}
+      />
 
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movie/:id" element={<MovieDetailPage />} />
-          <Route path="/watchList" element={<WatchListPage />} />
-          <Route path="/auth/callback" element={<AuthCallbackPage />} />
+          {routes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
         </Routes>
       </main>
     </Router>

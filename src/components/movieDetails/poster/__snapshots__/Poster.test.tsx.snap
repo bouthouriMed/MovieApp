@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Poster Component > renders movie poster with correct alt text and src 1`] = `
+<div>
+  <div
+    class="poster"
+  >
+    <img
+      alt="Test Movie"
+      src="https://image.tmdb.org/t/p/w500/poster.jpg"
+    />
+  </div>
+</div>
+`;

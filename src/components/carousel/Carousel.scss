@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "@/styles/variables.scss";
 
 .carousel-container {
   position: relative;
@@ -54,7 +54,6 @@
     }
   }
 
-  // Arrow buttons
   .arrow {
     position: absolute;
     top: 50%;
@@ -90,6 +89,29 @@
       background: rgba(34, 31, 31, 0.4);
       cursor: not-allowed;
       transform: translateY(-50%) scale(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel {
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+    .fade {
+      width: 50px;
+    }
+    .arrow {
+      display: none;
+    } // hide arrows on tablets and mobile
+  }
+
+  @media (max-width: 480px) {
+    .carousel {
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+    }
+    .fade {
+      width: 30px;
     }
   }
 }

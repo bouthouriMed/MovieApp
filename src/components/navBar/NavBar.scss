@@ -1,5 +1,5 @@
-@import "./styles/variables";
-@import "./styles/mixins";
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .app-header {
   position: sticky;
@@ -15,7 +15,8 @@
   nav {
     display: flex;
     gap: 1.5rem;
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
 
     a {
       font-weight: 500;
@@ -126,6 +127,12 @@
         margin: 0;
         font-size: 0.9rem;
         color: lighten($text-color, 20%);
+      }
+
+      @media (max-width: 768px) {
+        .user-status {
+          display: none;
+        }
       }
     }
   }

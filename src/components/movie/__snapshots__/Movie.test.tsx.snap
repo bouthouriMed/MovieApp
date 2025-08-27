@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Movie > matches snapshot 1`] = `
+<div>
+  <div
+    class="movie-card"
+  >
+    <a
+      class="movie-link"
+      data-discover="true"
+      href="/movie/1"
+    >
+      <img
+        alt="Test Movie"
+        src="https://image.tmdb.org/t/p/w300/poster.jpg"
+      />
+    </a>
+  </div>
+</div>
+`;
