@@ -2,7 +2,7 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   test: {
     environment: "jsdom",
@@ -15,5 +15,5 @@ export default defineConfig({
       "\\.(css|scss)$": path.resolve(__dirname, "__mocks__/styleMock.ts"),
     },
   },
-  base: "/MovieApp/",
-});
+  base: mode === "production" ? "/MovieApp/" : "/",
+}));
