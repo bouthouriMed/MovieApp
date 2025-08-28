@@ -4,11 +4,11 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ToastContainer } from "react-toastify";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/MovieApp">
+    <HashRouter basename="/MovieApp">
       <Provider store={store}>
         <App />
         <ToastContainer
@@ -22,6 +22,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           theme="dark"
         />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
