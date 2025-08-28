@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useWatchlistToggle } from "@/hooks/useWatchlistToggle";
 import { Movie } from "@/pages/movieDetailPage/types";
 import "./WatchListItem.scss";
