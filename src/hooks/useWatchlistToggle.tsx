@@ -46,7 +46,7 @@ export const useWatchlistToggle = (movie: Movie) => {
           session_id: auth.sessionId,
           account_id: auth.accountId,
         });
-        if ("data" in res && res.data.success) {
+        if (res.data.success) {
           dispatch(addTowatchList(movie));
           setIsInWatchlist(true);
         }

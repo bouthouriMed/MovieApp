@@ -32,7 +32,11 @@ export const watchListSlice = createSlice({
       toast.success(`"${action.payload.title}" added to your wishlist!`);
     },
     setwatchList: (state, action: PayloadAction<Movie[]>) => {
-      state.movies = action.payload;
+      // Merge new movies to store
+      const existingIds = new Set(state.movies.map((m) => m.id));
+      const newMovies = action.payload.filter((m) => !existingIds.has(m.id));
+
+      state.movies = [...state.movies, ...newMovies];
     },
     removeFromwatchList: (state, action: PayloadAction<number>) => {
       const removedMovie = state.movies.find((m) => m.id === action.payload);
