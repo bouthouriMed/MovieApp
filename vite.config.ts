@@ -15,5 +15,4 @@ export default defineConfig(({ mode }) => ({
       "\\.(css|scss)$": path.resolve(__dirname, "__mocks__/styleMock.ts"),
     },
   },
-  base: mode === "production" ? "/MovieApp/" : "/",
 }));
