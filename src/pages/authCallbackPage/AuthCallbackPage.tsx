@@ -8,11 +8,12 @@ const AuthCallbackPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const request_token = params.get("request_token");
-    const approved = params.get("approved");
-    const from =
-      params.get("from")?.replace(/^\/MovieApp/, "") || ROUTES_URLS.Home; // fallback to home
+    // Parse query params from hash
+    const hash = window.location.hash.replace(/^#/, ""); // remove #
+    const searchParams = new URLSearchParams(hash.split("?")[1]);
+    const request_token = searchParams.get("request_token");
+    const approved = searchParams.get("approved");
+    const from = searchParams.get("from") || ROUTES_URLS.Home;
 
     if (approved === "true" && request_token) {
       finalizeLogin(request_token).then(() => {

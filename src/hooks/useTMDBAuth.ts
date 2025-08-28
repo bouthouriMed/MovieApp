@@ -27,15 +27,15 @@ export function useTMDBAuth(doRequestToken = true) {
   const login = useCallback(() => {
     const appBase = import.meta.env.BASE_URL;
     if (tokenData?.request_token) {
-      const currentPath = window.location.pathname || "/"; // fallback to '/';
+      const hashPath = window.location.hash?.replace(/^#/, "") || "/"; // fallback to '/';
 
-      localStorage.setItem("tmdbRedirectFrom", currentPath);
+      localStorage.setItem("tmdbRedirectFrom", hashPath);
 
       window.location.href = `https://www.themoviedb.org/authenticate/${
         tokenData.request_token
-      }?redirect_to=${
-        window.location.origin
-      }${appBase}/#/auth/callback?from=${encodeURIComponent(currentPath)}`;
+      }?redirect_to=${encodeURIComponent(
+        `${window.location.origin}${appBase}/#/auth/callback`
+      )}?from=${encodeURIComponent(hashPath)}`;
     } else toast.error("No authorisation token");
   }, [tokenData]);
 
