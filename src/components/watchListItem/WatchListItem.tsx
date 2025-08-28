@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useWatchlistToggle } from "@/hooks/useWatchlistToggle";
 import { Movie } from "@/pages/movieDetailPage/types";
 import "./WatchListItem.scss";
@@ -10,15 +9,7 @@ type Props = {
 };
 
 const WatchListItem = ({ movie }: Props) => {
-  const { toggle, isInWatchlist } = useWatchlistToggle(movie);
-
-  const removeFromWatchList = async () => {
-    try {
-      await toggle();
-    } catch {
-      toast.error("Failed to update wishlist.");
-    }
-  };
+  const { toggle } = useWatchlistToggle(movie);
 
   return (
     <div className="watchList-card" key={movie.id}>
@@ -34,11 +25,8 @@ const WatchListItem = ({ movie }: Props) => {
         <p className="meta">
           {movie.release_date?.slice(0, 4)} • ⭐ {movie.vote_average.toFixed(1)}
         </p>
-        <button
-          className={`toggle-btn ${isInWatchlist ? "remove" : "add"}`}
-          onClick={removeFromWatchList}
-        >
-          {isInWatchlist ? "✖ Remove" : "➕ Add"}
+        <button className="toggle-btn" onClick={toggle}>
+          ✖ Remove
         </button>
       </div>
     </div>

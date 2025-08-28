@@ -27,10 +27,10 @@ const WatchListPage = () => {
   );
 
   useEffect(() => {
-    if (apiWatchList && watchList.length === 0) {
+    if (apiWatchList) {
       dispatch(setwatchList(apiWatchList));
     }
-  }, [apiWatchList, watchList.length, dispatch]);
+  }, [apiWatchList]);
 
   useEffect(() => {
     if (isError) navigate(ROUTES_URLS.Oops);
