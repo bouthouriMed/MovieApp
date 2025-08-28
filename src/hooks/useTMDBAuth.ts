@@ -35,7 +35,7 @@ export function useTMDBAuth(doRequestToken = true) {
         tokenData.request_token
       }?redirect_to=${
         window.location.origin
-      }${appBase}/auth/callback?from=${encodeURIComponent(currentPath)}`;
+      }${appBase}/#/auth/callback?from=${encodeURIComponent(currentPath)}`;
     } else toast.error("No authorisation token");
   }, [tokenData]);
 
