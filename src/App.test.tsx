@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import * as useTMDBAuthHook from "./hooks/useTMDBAuth";
 import * as movieSlice from "./store/movieSlice"; // RTK query hooks
-import { createTestStore, renderWithoutRouter } from "./test-utils";
+import { createTestStore, render } from "./test-utils";
 import App from "./App";
 
 describe("App", () => {
@@ -23,7 +23,7 @@ describe("App", () => {
       finalizeLogin: mockFinalizeLogin,
     });
 
-    renderWithoutRouter(<App />, { store });
+    render(<App />, { store });
 
     expect(screen.getByText(/login with tmdb/i)).toBeInTheDocument();
   });
@@ -41,7 +41,7 @@ describe("App", () => {
       finalizeLogin: mockFinalizeLogin,
     });
 
-    renderWithoutRouter(<App />, { store });
+    render(<App />, { store });
 
     expect(screen.getByTitle("Logout")).toBeInTheDocument();
     expect(screen.getByText(/logged in as/i)).toBeInTheDocument();
@@ -67,7 +67,7 @@ describe("App", () => {
       ],
       isLoading: false,
     } as any);
-    renderWithoutRouter(<App />, { store });
+    render(<App />, { store });
 
     const watchlistLink = screen.getByText(/wishlist/i);
     fireEvent.click(watchlistLink);

@@ -1,19 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./styles/global.scss";
+import { Routes, Route } from "react-router-dom";
 import { useTMDBAuth } from "./hooks/useTMDBAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./store/authSlice";
 import { clearWatchList } from "./store/watchListSlice";
 import { routes } from "./routes";
 import NavBar from "./components/navBar/NavBar";
+import "./styles/global.scss";
 
 function App() {
   const { login } = useTMDBAuth();
-
   const dispatch = useDispatch();
-
   const sessionId = localStorage.getItem("tmdbSessionId");
-
   const account = useSelector((state: any) => state.auth.account);
 
   const handleLogout = () => {
@@ -22,14 +19,13 @@ function App() {
   };
 
   return (
-    <Router>
+    <>
       <NavBar
         sessionId={sessionId}
         account={account}
         login={login}
         handleLogout={handleLogout}
       />
-
       <main>
         <Routes>
           {routes.map(({ path, element }) => (
@@ -37,7 +33,7 @@ function App() {
           ))}
         </Routes>
       </main>
-    </Router>
+    </>
   );
 }
 
