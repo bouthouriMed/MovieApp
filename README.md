@@ -18,40 +18,43 @@ A React + TypeScript web app to browse films by category, view details, and mana
 
 ---
 
-## Project Structure
+### 📂 Project Structure
 
-src/
-├─ pages/
-│ ├─ authCallbackPage/
-│ │ ├─ AuthCallbackPage.tsx
-│ │ ├─ AuthCallbackPage.scss
-│ │ └─ AuthCallbackPage.test.tsx
-│ └─ watchListPage/
-│ ├─ WatchListPage.tsx
-│ ├─ WatchListPage.scss
-│ └─ WatchListPage.test.tsx
-├─ components/
-│ ├─ watchButton/
-│ │ ├─ WatchButton.tsx
-│ │ ├─ WatchButton.scss
-│ │ └─ WatchButton.test.tsx
-│ └─ additionalInfo/
-│ ├─ AdditionalInfo.tsx
-│ ├─ AdditionalInfo.scss
-│ └─ AdditionalInfo.test.tsx
-├─ hooks/
-│ ├─ useTMDBAuth.ts
-│ └─ useTMDBAuth.test.tsx
-├─ store/
-│ ├─ authSlice.ts
-│ └─ apiSlice.ts
-├─ routes.ts
-└─ main.tsx
-└─ test-utils.tsx
+```bash
+📂 src
+├─ 📂 pages
+│  ├─ 📂 authCallbackPage
+│  │  ├─ 📄 AuthCallbackPage.tsx
+│  │  ├─ 🎨 AuthCallbackPage.scss
+│  │  └─ 🧪 AuthCallbackPage.test.tsx
+│  └─ 📂 watchListPage
+│     ├─ 📄 WatchListPage.tsx
+│     ├─ 🎨 WatchListPage.scss
+│     └─ 🧪 WatchListPage.test.tsx
+├─ 📂 components
+│  ├─ 📂 watchButton
+│  │  ├─ 📄 WatchButton.tsx
+│  │  ├─ 🎨 WatchButton.scss
+│  │  └─ 🧪 WatchButton.test.tsx
+│  └─ 📂 additionalInfo
+│     ├─ 📄 AdditionalInfo.tsx
+│     ├─ 🎨 AdditionalInfo.scss
+│     └─ 🧪 AdditionalInfo.test.tsx
+├─ 📂 hooks
+│  ├─ 📄 useTMDBAuth.ts
+│  └─ 🧪 useTMDBAuth.test.tsx
+├─ 📂 store
+│  ├─ 📄 authSlice.ts
+│  └─ 📄 apiSlice.ts
+├─ 📄 routes.ts
+├─ 📄 main.tsx
+└─ 🧪 test-utils.tsx
 
-> **Note:** Each page/component has its SCSS and test file in the same folder. Links below connect between files for easier navigation.
-
----
+📄 = TypeScript file
+🎨 = SCSS stylesheet
+🧪 = Test file
+📂 = Folder
+```
 
 ## Setup & Run
 
